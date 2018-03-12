@@ -451,6 +451,7 @@ endif
         let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
     endif
 
+    let g:ycm_python_binary_path = 'python'
     " 直接触发自动补全 insert模式下
     " let g:ycm_key_invoke_completion = '<C-Space>'
     " 黑名单,不启用
@@ -649,6 +650,11 @@ endif
     " <leader>gl maps to :Glog<CR>
     " <leader>gc maps to :Gcommit<CR>
     " <leader>gp maps to :Git push<CR>
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+    autocmd User fugitive 
+      \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+      \   nnoremap <buffer> .. :edit %:h<CR> |
+      \ endif
 " }}}
 
 " gitgutter {{{
